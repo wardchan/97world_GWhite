@@ -763,4 +763,32 @@ function add_checkbox() {
   echo '<div style="right:50px; bottom:12px; position:absolute;"><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked" style="margin-left:20px;" /><label for="comment_mail_notify">有人回复时邮件通知我</label></div>';
 }
 add_action('comment_form', 'add_checkbox');
+
+/* 验证码 */
+function spam_protection_math(){
+//获取两个随机数, 范围0~9
+$num1=rand(0,9);
+$num2=rand(0,9);
+//最终网页中的具体内容
+echo "<input type='text' name='sum' class='math_textfield' value='' size='25' tabindex='4'> $num1 + $num2 = ?"
+."<input type='hidden' name='num1' value='$num1'>"
+."<input type='hidden' name='num2' value='$num2'>"
+."<label for='math' class='small'> 验证码</label>";
+
+}
+function spam_protection_pre($commentdata){
+$sum=$_POST['sum'];//用户提交的计算结果
+switch($sum){
+//得到正确的计算结果则直接跳出
+case $_POST['num1']+$_POST['num2']:break;
+//未填写结果时的错误讯息
+case null:err('错误: 请输入验证码.');break;
+//计算错误时的错误讯息
+default:err('错误: 验证码错误,请重试.');
+}
+return $commentdata;
+}
+if($comment_data['comment_type']==''){
+add_filter('preprocess_comment','spam_protection_pre');
+}
 ?>
