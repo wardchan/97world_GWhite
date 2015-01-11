@@ -363,6 +363,8 @@ if ( ! function_exists( 'twentyten_posted_on' ) ) :
  * @since Twenty Ten 1.0
  */
 function twentyten_posted_on() {
+	$view_count='';
+	if(function_exists('the_views')) { $view_count='<span class="entry-eye">'.the_views(false).'</span>'; }
 	printf( __( '%2$s %3$s %4$s %5$s', 'twentyten' ),
 		'meta-prep meta-prep-author',
 		sprintf( '<span class="entry-date">发布时间：%3$s</span>',
@@ -378,7 +380,7 @@ function twentyten_posted_on() {
 		sprintf( '<span class="cat-links">%1$s</span>',
 			get_the_category_list( ', ' )
 		),
-		sprintf('<span class="entry-eye">'.the_views(false).'</span>')
+		sprintf($view_count)
 	);
 }
 endif;
