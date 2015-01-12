@@ -215,12 +215,12 @@ function mytheme_comment($comment, $args, $depth) {
 
 	global $commentcount;
 	$page = ( !empty($in_comment_loop) ) ? get_query_var('cpage') : get_page_of_comment( $comment->comment_ID, $args );
-	$cpp=get_option('comments_per_page');//èŽ·å–æ¯é¡µè¯„è®ºæ˜¾ç¤ºæ•°é‡
-	if(!$commentcount) { //åˆå§‹åŒ–æ¥¼å±‚è®¡æ•°å™¨
+	$cpp=get_option('comments_per_page');//获取每页评论显示数量
+	if(!$commentcount) { //初始化楼层计数器
 		if ($page > 1) {
 		$commentcount = $cpp * ($page - 1);
 		} else {
-		$commentcount = 0;//å¦‚æžœè¯„è®ºè¿˜æ²¡æœ‰åˆ†é¡µï¼Œåˆå§‹å€¼ä¸º0
+		$commentcount = 0;//如果评论还没有分页，初始值为0
 		}
 	}
 	?>
@@ -358,7 +358,7 @@ add_action( 'widgets_init', 'twentyten_remove_recent_comments_style' );
 
 if ( ! function_exists( 'twentyten_posted_on' ) ) :
 /**
- * Prints HTML with meta information for the current postâ€”date/time and author.
+ * Prints HTML with meta information for the current post—date/time and author.
  *
  * @since Twenty Ten 1.0
  */
@@ -413,23 +413,23 @@ function twentyten_posted_in() {
 endif;
 
 /* Mini Pagenavi v1.0 by Willin Kan. */
-function pagenavi( $before = '', $after = '', $p = 2 ) { // å–ç•¶å‰é å‰å¾Œå„ 2 é 
-  if ( is_singular() ) return; // æ–‡ç« èˆ‡æ’é ä¸ç”¨
+function pagenavi( $before = '', $after = '', $p = 2 ) { // 取當前頁前後各 2 頁
+  if ( is_singular() ) return; // 文章與插頁不用
   global $wp_query, $paged;
   $max_page = $wp_query->max_num_pages;
-  if ( $max_page == 1 ) return; // åªæœ‰ä¸€é ä¸ç”¨
+  if ( $max_page == 1 ) return; // 只有一頁不用
   if ( empty( $paged ) ) $paged = 1;
   echo $before.'<div id="pagenavi">'."\n";
-  echo '<span class="pages">Page: ' . $paged . ' of ' . $max_page . ' </span>'; // é æ•¸
-  if ( $paged > 1 ) p_link( $paged - 1, 'Previous Page', '«' );/* å¦‚æžœå½“å‰é¡µå¤§äºŽ1å°±æ˜¾ç¤ºä¸Šä¸€é¡µé“¾æŽ¥ */
+  echo '<span class="pages">Page: ' . $paged . ' of ' . $max_page . ' </span>'; // 頁數
+  if ( $paged > 1 ) p_link( $paged - 1, 'Previous Page', '«' );/* 如果当前页大于1就显示上一页链接 */
   if ( $paged > $p + 1 ) p_link( 1, 'First Page' );
   if ( $paged > $p + 2 ) echo '... ';
-  for( $i = $paged - $p; $i <= $paged + $p; $i++ ) { // ä¸­é–“é 
+  for( $i = $paged - $p; $i <= $paged + $p; $i++ ) { // 中間頁
     if ( $i > 0 && $i <= $max_page ) $i == $paged ? print "<span class='page-numbers current'>{$i}</span>" : p_link( $i );
   }
   if ( $paged < $max_page - $p - 1 ) echo '... ';
   if ( $paged < $max_page - $p ) p_link( $max_page, 'Last Page' );
-  if ( $paged < $max_page ) p_link( $paged + 1,'Next Page', '»' );/* å¦‚æžœå½“å‰é¡µä¸æ˜¯æœ€åŽä¸€é¡µæ˜¾ç¤ºä¸‹ä¸€é¡µé“¾æŽ¥ */
+  if ( $paged < $max_page ) p_link( $paged + 1,'Next Page', '»' );/* 如果当前页不是最后一页显示下一页链接 */
   echo '</div>'.$after."\n";
 }
 function p_link( $i, $title = '', $linktype = '' ) {
@@ -657,25 +657,22 @@ function __popular_posts($no_posts=6, $before="<li>", $after="</li>", $show_pass
 	return  $output;
 }
 
-
-//²ÊÉ«±êÇ©ÔÆ
 function colorCloud($text) {
     $text = preg_replace_callback('|<a (.+?)>|i', 'colorCloudCallback', $text);
     return $text;
 }
 function colorCloudCallback($matches) {
     $text = $matches[1];
-    for($a=0;$a<6;$a++){    //²ÉÓÃ#ffffff·½·¨
-       $color.=dechex(rand(0,15));//ÀÛ¼ÓËæ»úµÄÊý¾Ý--dechex()½«Ê®½øÖÆ¸ÄÎªÊ®Áù½øÖÆ
+    for($a=0;$a<6;$a++){    
+       $color.=dechex(rand(0,15));
     }
     $pattern = '/style=(\'|\")(.*)(\'|\")/i';
     $text = preg_replace($pattern, "style=\"color:#{$color};$2;\"", $text);
     return "</a><a $text>";
-    unset($color);//Ð¶ÔØcolor
+    unset($color);
 }
 add_filter('wp_tag_cloud', 'colorCloud', 1);
 
-//µÇÂ½ÏÔÊ¾Í·Ïñ
 function weisay_get_avatar($email, $size = 48){
 return get_avatar($email, $size);
 }

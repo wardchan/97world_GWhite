@@ -33,8 +33,6 @@
 		echo ' | ' . sprintf( __( 'Page %s', 'twentyten' ), max( $paged, $page ) );
 
 	?></title>
-<meta name="keywords" content="折腾,浏览器,firefox,扩展,windows,97world,工具,软件,软件使用技巧,解决方法,GOOGLE,编程,折腾的世界" />
-<meta name="description" content="折腾の世界是一个分享软件使用技巧的网站，帮助大家解决电脑软件使用问题，是一个有求必应的交流平台。" />
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />

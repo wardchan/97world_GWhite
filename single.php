@@ -49,7 +49,7 @@ get_header(); ?>
 						</div><!-- #author-description -->
 					</div><!-- #entry-author-info -->
 <?php endif; ?>
-					
+
 					<div class="entry-utility">
 						<?php
 							$tags_list = get_the_tag_list( '', ', ' );
