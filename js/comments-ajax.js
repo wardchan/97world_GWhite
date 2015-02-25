@@ -10,7 +10,7 @@ while ( i <= len && got == -1){
 var edit_mode = '1', // 再編輯模式 ( '1'=開; '0'=不開 )
 		ajax_php_url = js_url.replace('js/comments-ajax.js','comments-ajax.php'),
 		wp_url = js_url.substr(0, js_url.indexOf('wp-content')),
-		pic_sb = wp_url + 'wp-content/themes/g-white/images/ajax-loader.gif', // 提交 icon
+		pic_sb = wp_url + 'wp-content/themes/97world_GWhite/images/ajax-loader.gif', // 提交 icon
 		pic_no = wp_url + 'wp-admin/images/no.png',      // 錯誤 icon
 		pic_ys = wp_url + 'wp-admin/images/yes.png',     // 成功 icon
 		txt1 = '<div id="loading"><img src="' + pic_sb + '" style="vertical-align:middle;" alt=""/> Submitting your comment, please wait...</div>',

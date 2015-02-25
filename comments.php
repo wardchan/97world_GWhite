@@ -96,7 +96,7 @@
 		<label for="email"><?php _e('Mail (will not be published)'); ?> <?php if ($req) echo "(required)"; ?></label></p>
 		<p><input type="text" name="url" id="url" value="<?php echo $comment_author_url; ?>" size="22" tabindex="3" />
 		<label for="url"><?php _e('Website'); ?></label></p>
-		<p><?php spam_protection_math();?></p>
+		<p><?php if(!isset($_COOKIE['comment_author_email_'.COOKIEHASH]))spam_protection_math();?></p>
 		</div>
 		<?php endif; ?>
 		<!--<p><small><strong>XHTML:</strong> You can use these tags: <code><?php echo allowed_tags(); ?></code></small></p>-->

@@ -444,11 +444,11 @@ DESCRIPTION: Full width content with no sidebar; used for attachment pages
 	padding: 5px 15px;
 	border-right: 1px solid #999;
 }
-/* #content tr td {
+#content tr td {
 	border-top: 1px solid #999999;
 	border-right: 1px solid #999;
 	padding: 3px 15px;
-} */
+} 
 #content tr.odd td {
 	background: #f5f5f5;
 }
@@ -747,13 +747,13 @@ body.page .edit-link {
 
 /* Images **************/
 
-/* .hentry img {
+.hentry img {
 	margin: 0;
 	height: auto;
 	max-width: 570px;
 	width: auto;
 	padding: 4px;
-} */
+} 
 #content .attachment img {
 	max-width: 900px;
 }
