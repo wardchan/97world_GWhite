@@ -35,7 +35,7 @@ get_header(); ?>
 							<ul>
 								<?php
 								$default_ico ='http://www.google.com.hk/s2/favicons?domain=fredomfeng.com'; //默认 ico 图片位置
-								$bookmarks = get_bookmarks('title_li=&categorize=0&category=204,205'); //全部链接随机输出
+								$bookmarks = get_bookmarks('title_li=&categorize=0&category=3'); //全部链接随机输出
 								//如果你要输出某个链接分类的链接，更改一下get_bookmarks参数即可
 								//如要输出链接分类ID为5的链接 title_li=&categorize=0&category=5&orderby=rand
 								if ( !empty($bookmarks) ) {	
